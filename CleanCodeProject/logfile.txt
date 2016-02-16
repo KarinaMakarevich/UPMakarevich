@@ -1,0 +1,4 @@
+New message  addedGo
+Message was found by the word: Hello!
+Message was found by the word: Hello,
+Message was found by the word: Hello, jjjj
