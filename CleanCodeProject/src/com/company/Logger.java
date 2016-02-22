@@ -2,16 +2,13 @@ package com.company;
 
 import java.io.*;
 
-/**
- * Created by Карина on 16.02.2016.
- */
 public class Logger {
     private static final String filename = "logfile.txt";
-    private static BufferedWriter bw;
+    private static BufferedWriter writer;
 
     static {
         try {
-            bw = new BufferedWriter(new FileWriter(filename));
+            writer = new BufferedWriter(new FileWriter(filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -19,9 +16,9 @@ public class Logger {
 
     public static void write(String message) {
         try {
-            bw.write(message);
-            bw.newLine();
-            bw.flush();
+            writer.write(message);
+            writer.newLine();
+            writer.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -52,8 +52,7 @@ public class WorkWithUser {
                         break;
                 }
             } catch (IOException e) {
-                Logger.write("IOException");
-                e.printStackTrace();
+                Logger.write("IOException in work with user");
             }
         }
     }

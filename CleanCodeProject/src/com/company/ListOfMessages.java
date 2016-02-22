@@ -17,16 +17,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Карина on 16.02.2016.
- */
 public class ListOfMessages {
-    protected List<Message> arraylist;
+    protected List<Message> listOfMessages;
     public ObjectMapper mapper;
-    public BufferedReader inp;
+    public static BufferedReader inp;
 
     public ListOfMessages() {
-        arraylist = new ArrayList<>();
+        listOfMessages = new ArrayList<>();
         mapper = new ObjectMapper();
         inp = new BufferedReader(new InputStreamReader(System.in));
     }
@@ -40,11 +37,10 @@ public class ListOfMessages {
             e.printStackTrace();
         }
         try {
-            arraylist = mapper.readValue(jsonData, new TypeReference<ArrayList<Message>>() {
+            listOfMessages = mapper.readValue(jsonData, new TypeReference<ArrayList<Message>>() {
             });
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (can not read file)");
         }
     }
 
@@ -54,31 +50,28 @@ public class ListOfMessages {
         try {
             user = inp.readLine();
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (wrong input of name) ");
         }
         System.out.println("Input Message: ");
         String userMessage = null;
         try {
             userMessage = inp.readLine();
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (wrong input of message) ");
         }
         Message message = new Message(UUID.randomUUID().toString(), user, Date.from(Instant.now()).getTime(), userMessage);
-        arraylist.add(message);
+        listOfMessages.add(message);
         Logger.write("New message  added: " + message.getMessage());
         try {
-            mapper.writeValue(new File("chat.json"), arraylist);
+            mapper.writeValue(new File("chat.json"), listOfMessages);
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (can not write to file)");
         }
         System.out.println("Message was sent");
     }
 
     public void showHistory() {
-        Iterator it = arraylist.iterator();
+        Iterator it = listOfMessages.iterator();
         System.out.println("History:");
         while (it.hasNext()) {
             Message mess = (Message) it.next();
@@ -96,14 +89,13 @@ public class ListOfMessages {
         try {
             id = inp.readLine();
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (wrong input of ID)");
         }
-        for (int i = 0; i < arraylist.size(); i++) {
+        for (int i = 0; i < listOfMessages.size(); i++) {
             assert id != null;
-            if (id.equals(arraylist.get(i).getId())) {
-                arraylist.remove(i);
-                Logger.write("Message was deleted: "+arraylist.get(i).getMessage());
+            if (id.equals(listOfMessages.get(i).getId())) {
+                listOfMessages.remove(i);
+                Logger.write("Message was deleted: " + listOfMessages.get(i).getMessage());
                 System.out.println("Deleting is successful");
                 k++;
             }
@@ -118,11 +110,10 @@ public class ListOfMessages {
         try {
             name = inp.readLine();
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (wrong input of name) ");
         }
         int count = 0;
-        for (Message anArraylist : arraylist) {
+        for (Message anArraylist : listOfMessages) {
             assert name != null;
             if (name.equals(anArraylist.getAuthor())) {
                 Logger.write("Message was found by the author: " + anArraylist.getMessage());
@@ -141,10 +132,9 @@ public class ListOfMessages {
         try {
             word = inp.readLine();
         } catch (IOException e) {
-            Logger.write("IOException");
-            e.printStackTrace();
+            Logger.write("IOException (wrong input of word) ");
         }
-        for (Message anArraylist : arraylist) {
+        for (Message anArraylist : listOfMessages) {
             assert word != null;
             if (anArraylist.getMessage().contains(word)) {
                 Logger.write("Message was found by the word: " + anArraylist.getMessage());
@@ -163,13 +153,12 @@ public class ListOfMessages {
         try {
             str = inp.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
-            Logger.write("IOException");
+            Logger.write("IOException (wrong input of regex) ");
         }
 
         assert str != null;
         Pattern p = Pattern.compile(str);
-        for (Message anArraylist : arraylist) {
+        for (Message anArraylist : listOfMessages) {
             Matcher m;
             m = p.matcher(anArraylist.getMessage());
             if (m.matches()) {
@@ -184,9 +173,13 @@ public class ListOfMessages {
         Long beginDate = dateToLong(firstAdvice);
         String secondAdvice = "Input the date of the ending at the format: dd.MM.yyyy HH:mm:ss";
         Long endDate = dateToLong(secondAdvice);
-        for (Message anArraylist : arraylist) {
-            if ((anArraylist.getTimestamp() >= beginDate) && (anArraylist.getTimestamp() <= endDate)) {
-                System.out.println(anArraylist.getMessage());
+        if (beginDate == -1 && endDate == -1) {
+            System.out.println("Incorrect");
+        } else {
+            for (Message anArraylist : listOfMessages) {
+                if ((anArraylist.getTimestamp() >= beginDate) && (anArraylist.getTimestamp() <= endDate)) {
+                    System.out.println(anArraylist.getMessage());
+                }
             }
         }
     }
@@ -194,21 +187,22 @@ public class ListOfMessages {
     public static Long dateToLong(String output) {
         Long formatDate = null;
         System.out.println(output);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            String normalDate = reader.readLine();
+            String normalDate = inp.readLine();
             SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
             try {
                 Date date = formatter.parse(normalDate);
                 formatDate = date.getTime();
             } catch (ParseException e) {
-                Logger.write("ParseException");
-                e.printStackTrace();
+                Logger.write("ParseException (wrong input) ");
+                System.out.println("Wrong input of date");
             }
         } catch (IOException e) {
-            Logger.write("ParseException");
-            e.printStackTrace();
+            Logger.write("ParseException (wrong input of date)");
+            System.out.println("Wrong input");
         }
-        return formatDate;
+        if (formatDate == null) {
+            return (long) -1;
+        } else return formatDate;
     }
 }
