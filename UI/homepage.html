@@ -1,54 +1,48 @@
 <html>
 	<head>
-		<title>
-			Chat
-		</title>
 			<link rel = "stylesheet" type = "text/css" href = "style.css"/>	
+			<link rel = "stylesheet" type = "text/css" href = "responsive.css"/>		
+		<script src="scripts.js"></script>	
 	</head>
-	<body>
+	<body onload = "run();">
 		<h1 class = "title">
 			Chat
 				</h1>
-			<div class = "name">
-				Name
-					<input type = "text" class = "inputName" placeholder = "Input Name">
-			</div>
+			<main class = "myClass">
 			<div class = "name">
 				Change Name
 					<input type = "text" class = "inputName" placeholder = "Change Name">
+					<div class = "Uname">
+					Your name
+					<input type = "text" class = "userName" disabled="disabled" placeholder = "User">
+					</div>
 			</div>	
-			<p>Lost connection to server</p>
-			</div>
-				<div id = "message">
-					<h4> I: hello</h4>
-					<h4> She: hi)</h4>
-					<h4> I: How are you?</h4>
-					<h4> I: I'm fine:) What about you?</h4>
-					<h4> I: ...</h4>
-					<div id="closeButton">
-					<button class ="close">
-						X
-					</button>
-					</div>
-					<div id = "underInput">
-						<input type = "text" class = "inputMessage" placeholder = "Input message">
-		        		</div>
-					<div id = "sendMes">
-						<button class = "send">
-							Send 
-						</button>
-					</div>
-						<div id = "changeMes">
-						<button class = "change">
-							Change message
-						</button>
-					</div>
+				<div class = "items">
+				<div class = "chat">
+					Welcome to your chat!
+				<div class = "yourNick" align = "left">
+				<div class = "time" align = "left">
 				</div>
-			</div>
-			<div id = "">
+				</div>
+				<div class = "message" align = "center">
+				</div>
+				<div class = "flags" align = "right">
+				</div>
+				</div>
+				</div>
+					<div id = "underInput">
+						<div id = "Inputting">
+						<textarea class = "inputMessage" placeholder = "Input message"></textarea>
+						</div>
+						<div id = "Sending">
+						<button class = "send">Send</button>
+						</div>
+		        		</div>
+			</main>
 			<div id = "developer" class = "develope">
-				Макаревич Карина, ФПМИ, 2016.
+				Makarevich Karina, FPMI, 2016.
 			</div>
-			<img class = "error" src = "error.gif">
+			<img src = "good.gif" alt = "Server is OK" id = "ok">
+			<img src = "error.gif" alt = "ERROR" id = "error">
 	</body>
 </html>

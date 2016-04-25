@@ -1,28 +1,41 @@
 body
 {
 	background-image: url("body.jpg");
+	overflow:hidden;
 }
+
 
 .title
 {
 	color: white;
  	text-align: center;
-	margin-right:20%;
 	text-decoration: underline;
 	font-style: italic;
-	font-weight: normal;
+	margin-right:20%;
 	font-size: 4em;
+	font-weight: normal;
 	font-family: Andale Mono, monospace;
 	font-effect;
 }
 
-
-
-#message
+#ok
 {
+	position: absolute;
+	visibility: hidden;
+}
+
+#error
+{
+	position: absolute;
+	visibility: visible;
+}
+
+.items
+{
+	
 	background:white;
 	width:50%;
- 	height:70%;
+ 	height:60%;
 	position:absolute; 
 	right:35%; 
 	top:15%;	
@@ -30,27 +43,18 @@ body
 
 #underInput
 {
-	width:100%;
+	width:50%;
  	height:25%;
-	position:absolute;  
-	top:83%;
+	position:absolute; 
+	top:75%;
+	right:35%;
 }
 
-#sendMes
+#Inputting
 {
-	width:100%;
- 	height:25%;
-	position:absolute;  
-	top:93%;
-	left:20%;
-}
-
-#changeMes
-{
-	width:100%;
- 	height:25%;
-	position:absolute;  
-	top:93%;
+	display: inline-block;
+	width: 80%;
+	height:30%;
 }
 
 #developer
@@ -62,14 +66,42 @@ body
 	left:62%;
 }
 
-#closeButton
+.deletedFlag
 {
-	width:100%;
- 	height:25%;
-	position:absolute;  
-	top:78.5%;
-	left:96.5%;
-	
+	display:inline-block;
+}
+.changedFlag
+{
+	display:inline-block;
+}
+.changeButton
+{
+	display:inline-block;
+	text-color: white;
+	color: white;
+        top:10%;
+	width:55%;
+ 	height:6%;	
+	background-color: blue;
+	text-align: center;
+	font-size: 1em;
+	font-family: Andale Mono, monospace;
+	font-effect;
+	cursor: pointer;
+}
+.closeButton
+{
+	display:inline-block;
+	text-color: white;
+	color: white;
+	width:20%;
+ 	height:6%;	
+	background-color: red;
+	text-align: center;
+	font-size: 1em;
+	font-family: Andale Mono, monospace;
+	font-effect;
+	cursor: pointer;
 }
 
 .name
@@ -83,6 +115,22 @@ body
 	margin-right: 10%;
 }
 
+.chat
+{
+	list-style-type: none;
+	
+}
+
+.Uname
+{
+	font-family: Andale Mono, monospace;
+}
+.userName
+{
+	border-width: thick;
+	border-style: outset;
+	border-color:  #00BFFF;
+}
 .inputName
 {
 	border-width: thick;
@@ -90,33 +138,43 @@ body
 	border-color:  #00BFFF;
 }
 
-.inputMessage
+#Sending
 {
-	align:right;
-	width: 100%;
-	height: 40%;
-	font-style: normal;
-	font-weight: normal;
-	border-width: thick;
-	border-style: outset;
-	border-color:  #00BFFF;	
+	display: inline-block;
+	position:absolute;
+	width:20%;
+	height:30%;
+	
+}
+.inputMessage
+{	 text-align: justify;
+	resize:none;
+	width:100%;
+	height:100%;
+	
 }
 
-.send
+.line
 {
-	width: 30%;
-	height: 30%;
+	background-color:black;
+}
+.items
+{
+	overflow: auto;
+}
+.send
+{	
+	width: 100%;
+	height: 100%;
 	font-style: normal;
 	font-weight: normal;
 	border-width: thick;
 	border-style: outset;
 	border-color: blue;
-	margin-left:50%;
 	background-color: #4169E0;
  	color: white;
+	cursor: pointer;
  	text-align: center;
-	font-style: normal;
-	font-weight: normal;
 	font-size: 1.2em;
 	font-family: arial, serif;
 }
@@ -130,28 +188,31 @@ body
 	font-family: Andale Mono, monospace;
 }
 
-.change
-{
-	width: 30%;
-	height: 30%;
-	font-style: normal;
-	font-weight: normal;
-	border-width: thick;
-	border-style: outset;
-	border-color: blue;
-	background-color: #4169E0;
- 	color: white;
- 	text-align: center;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 1.2em;
-	font-family: arial, serif;	
+.yourNick
+{	
+	margin-top:2%;
+	display:inline-block;
+	width: 20%;
+	color:grey;
+	text-align: left;
+	text-align: top;
+	word-wrap: break-word;
 }
 
-.close
+.message
 {
-	align:right;
-	background:red;
-	color:white;
-	
+	margin-top:2%;
+	display:inline-block;
+	width: 60%;
+	text-align: left;
+	text-align: top;
+	word-wrap: break-word;
+}
+
+.flags
+{
+	margin-top:2%;
+	display:inline-block;
+	text-align: right;
+	width:18%;
 }
